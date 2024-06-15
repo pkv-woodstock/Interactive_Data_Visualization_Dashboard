@@ -1,6 +1,7 @@
 import pygal
 from .models import Employee
 
+
 class EmployeePieChart():
     def __init__(self, **kwargs):
         self.chart = pygal.Pie(**kwargs)
@@ -11,13 +12,14 @@ class EmployeePieChart():
         for emp in Employee.objects.all():
             data[emp.department] = emp.strength
         return data
-    
+
     def generate(self):
         chart_data = self.get_data()
         for key, value in chart_data.items():
             self.chart.add(key, value)
         return self.chart.render(is_unicode=True)
-        
+
+
 class EmployeeGaugeChart():
     def __init__(self, **kwargs):
         self.chart = pygal.Gauge(**kwargs)
@@ -28,13 +30,14 @@ class EmployeeGaugeChart():
         for emp in Employee.objects.all():
             data[emp.department] = emp.strength
         return data
-    
+
     def generate(self):
         chart_data = self.get_data()
         for key, value in chart_data.items():
             self.chart.add(key, value)
         return self.chart.render(is_unicode=True)
-    
+
+
 class EmployeeBarChart():
     def __init__(self, **kwargs):
         self.chart = pygal.Bar(**kwargs)
@@ -45,10 +48,9 @@ class EmployeeBarChart():
         for emp in Employee.objects.all():
             data[emp.department] = emp.strength
         return data
-    
+
     def generate(self):
         chart_data = self.get_data()
         for key, value in chart_data.items():
             self.chart.add(key, value)
         return self.chart.render(is_unicode=True)
-    

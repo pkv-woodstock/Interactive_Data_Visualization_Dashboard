@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from pygal.style import DarkStyle # 'DarkStyle' -> changeable
+from pygal.style import DarkStyle  # 'DarkStyle' -> changeable
 from django.http import HttpResponse
 from testapp.models import Employee
 from .charts import EmployeePieChart, EmployeeGaugeChart, EmployeeBarChart
+
 
 # Create your views here.
 def clear(request):
     Employee.objects.all().delete()
     return redirect('/home')
+
 
 def home(request):
     if request.method == 'POST':
@@ -20,6 +22,7 @@ def home(request):
 
     return render(request, 'home.html')
 
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -29,16 +32,17 @@ class IndexView(TemplateView):
         # Instantiate our chart. We'll keep the size/style/etc.
         # config here in the view instead of 'charts.py'
         cht_employee = EmployeePieChart(
-            height = 600,
-            width = 800,
-            explicit_size = True,
-            style = DarkStyle
+            height=600,
+            width=800,
+            explicit_size=True,
+            style=DarkStyle
         )
 
         # Call the '.generate()' method on our chart object
         # and pass it to template context.
         context['cht_employee'] = cht_employee.generate()
         return context
+
 
 class IndexView1(TemplateView):
     template_name = 'index.html'
@@ -49,17 +53,18 @@ class IndexView1(TemplateView):
         # Instantiate our chart. We'll keep the size/style/etc.
         # config here in the view instead of 'charts.py'
         cht_employee = EmployeeGaugeChart(
-            height = 600,
-            width = 800,
-            explicit_size = True,
-            style = DarkStyle
+            height=600,
+            width=800,
+            explicit_size=True,
+            style=DarkStyle
         )
 
         # Call the '.generate()' method on our chart object
         # and pass it to template context.
         context['cht_employee'] = cht_employee.generate()
         return context
-    
+
+
 class IndexView2(TemplateView):
     template_name = 'index.html'
 
@@ -69,10 +74,10 @@ class IndexView2(TemplateView):
         # Instantiate our chart. We'll keep the  size/style etc.
         # config here in the view instead of charts.py
         cht_employee = EmployeeBarChart(
-            height = 600, 
-            width = 800,
-            explicit_size = True,
-            style = DarkStyle
+            height=600,
+            width=800,
+            explicit_size=True,
+            style=DarkStyle
         )
 
         # Call the '.generate()' method on our chart object
