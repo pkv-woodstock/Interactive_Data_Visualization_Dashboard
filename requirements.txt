@@ -1,0 +1,6 @@
+asgiref==3.8.1
+Django==5.0.6
+importlib_metadata==7.1.0
+pygal==3.0.4
+sqlparse==0.5.0
+zipp==3.19.2
