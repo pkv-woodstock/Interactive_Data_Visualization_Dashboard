@@ -1,56 +1,26 @@
-import pygal
+import pygal 
 from .models import Employee
 
+class EmployeePieChart(pygal.Pie):
+    def __init__(self, *args, **kwargs):
+        super(EmployeePieChart, self).__init__(*args, **kwargs)
+        self.title = 'Employee Distribution by Department'
+        employees = Employee.objects.all()
+        for employee in employees:
+            self.add(employee.department, employee.strength)
 
-class EmployeePieChart():
-    def __init__(self, **kwargs):
-        self.chart = pygal.Pie(**kwargs)
-        self.chart.title = 'Employees in different department'
+class EmployeeGaugeChart(pygal.SolidGauge):
+    def __init__(self, *args, **kwargs):
+        super(EmployeeGaugeChart, self).__init__(*args, **kwargs)
+        self.title = 'Employee Strength by Department'
+        employees = Employee.objects.all()
+        for employee in employees:
+            self.add(employee.department, [{'value':employee.strength, 'max_value':500}]) 
 
-    def get_data(self):
-        data = {}
-        for emp in Employee.objects.all():
-            data[emp.department] = emp.strength
-        return data
-
-    def generate(self):
-        chart_data = self.get_data()
-        for key, value in chart_data.items():
-            self.chart.add(key, value)
-        return self.chart.render(is_unicode=True)
-
-
-class EmployeeGaugeChart():
-    def __init__(self, **kwargs):
-        self.chart = pygal.Gauge(**kwargs)
-        self.chart.title = 'Employees in different department'
-
-    def get_data(self):
-        data = {}
-        for emp in Employee.objects.all():
-            data[emp.department] = emp.strength
-        return data
-
-    def generate(self):
-        chart_data = self.get_data()
-        for key, value in chart_data.items():
-            self.chart.add(key, value)
-        return self.chart.render(is_unicode=True)
-
-
-class EmployeeBarChart():
-    def __init__(self, **kwargs):
-        self.chart = pygal.Bar(**kwargs)
-        self.chart.title = 'Employees in different department'
-
-    def get_data(self):
-        data = {}
-        for emp in Employee.objects.all():
-            data[emp.department] = emp.strength
-        return data
-
-    def generate(self):
-        chart_data = self.get_data()
-        for key, value in chart_data.items():
-            self.chart.add(key, value)
-        return self.chart.render(is_unicode=True)
+class EmployeeBarChart(pygal.Bar):
+    def __init__(self, *args, **kwargs):
+        super(EmployeeBarChart, self).__init__(*args, **kwargs)
+        self.title = 'Employee Strength by Department'
+        employees = Employee.objects.all()
+        for employee in employees:
+            self.add(employee.department, employee.strength)

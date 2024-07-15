@@ -4,40 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Department and Strength Form</title>
-    <style>
-        .btn{
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border: 2px solid #007bff;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .btn:hover{
-            background-color: #0056b3;
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Enter Details</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="department">Department:</label>
-        <input type="text" name="department"><br>
-        <label for="Strength">Strength:</label>
-        <input type="number" name="strength"><br>
-
-        <input type="submit" value="Submit">
-    </form>
-    <a href="/index" class="btn">Click to Pie chart</a>
-    <a href="/index1" class="btn">Click to Gauge chart</a>
-    <a href="/index2" class="btn">Click to Bar chart</a>
-    <a href="/clear" class="btn">Click to Clear chart</a>
-
+    <div class="container">
+        <h1>Enter Details</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" name="department" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="strength">Strength:</label>
+                <input type="number" name="strength" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <a href="/index" class="btn btn-info mt-3">Click to Pie chart</a>
+        <a href="/index1" class="btn btn-info mt-3">Click to Gauge chart</a>
+        <a href="/index2" class="btn btn-info mt-3">Click to Bar chart</a>
+        <a href="/clear" class="btn btn-danger mt-3">Click to Clear chart</a>
+        <a href="/employees" class="btn btn-success mt-3">View Employee List</a>
+    </div>
 </body>
 </html>
